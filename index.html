@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Platelet Odyssey | Blood Doctor</title>
+<meta name="description" content="From Aschoff's 1893 drawings to 2024 single-cell atlases — 130 years of discoveries reveal that platelets are born in a distributed organ system spanning bone marrow, lung, spleen, and beyond.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blood-red: #c41e3a;
+  --blood-dark: #8b0000;
+  --plasma-gold: #d4a574;
+  --bone-white: #f5f0eb;
+  --marrow-deep: #1a0a2e;
+  --lung-blue: #2d5f8a;
+  --cardiac-pink: #e8838a;
+  --spleen-purple: #6b3fa0;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a6a;
+  --accent-cyan: #00b4d8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bone-white);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ====== HERO ====== */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--marrow-deep) 0%, #2d1b4e 30%, var(--blood-dark) 70%, var(--blood-red) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(196,30,58,0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 30%, rgba(107,63,160,0.2) 0%, transparent 50%),
+              radial-gradient(circle at 50% 80%, rgba(45,95,138,0.2) 0%, transparent 50%);
+  animation: pulse-bg 8s ease-in-out infinite;
+}
+
+@keyframes pulse-bg {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Floating cells animation */
+.floating-cells {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+}
+
+.cell {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  animation: float linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(0deg); }
+  100% { transform: translateY(-100px) rotate(360deg); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.4rem 1.2rem;
+  border-radius: 50px;
+  color: var(--plasma-gold);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 span {
+  background: linear-gradient(90deg, var(--plasma-gold), #f0c987);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: rgba(255,255,255,0.8);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  font-weight: 300;
+}
+
+.hero-meta {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+.hero-meta strong { color: var(--plasma-gold); }
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.4);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.scroll-indicator::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  margin: 0.5rem auto 0;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ====== TIMELINE INTRO ====== */
+.timeline-intro {
+  background: linear-gradient(180deg, var(--marrow-deep), #0d0521);
+  padding: 5rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+.timeline-intro h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.timeline-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 2rem auto;
+  position: relative;
+}
+
+.timeline-bar::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blood-red), var(--spleen-purple), var(--lung-blue), var(--accent-cyan));
+}
+
+.timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--plasma-gold);
+  position: relative;
+  z-index: 1;
+  border: 2px solid var(--marrow-deep);
+}
+
+.timeline-dot .label {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  white-space: nowrap;
+  color: rgba(255,255,255,0.6);
+}
+
+.timeline-dot .year {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--plasma-gold);
+}
+
+/* ====== MAIN CONTENT ====== */
+.content-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ====== INSIGHT CARDS ====== */
+.insight-section {
+  padding: 4rem 0;
+}
+
+.section-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(196,30,58,0.08);
+  line-height: 1;
+  margin-bottom: -1.5rem;
+  position: relative;
+  z-index: 0;
+}
+
+.insight-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  border-left: 4px solid var(--blood-red);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.insight-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+}
+
+.insight-card.lung { border-left-color: var(--lung-blue); }
+.insight-card.spleen { border-left-color: var(--spleen-purple); }
+.insight-card.cardiac { border-left-color: var(--cardiac-pink); }
+.insight-card.fetal { border-left-color: var(--plasma-gold); }
+.insight-card.future { border-left-color: var(--accent-cyan); }
+
+.organ-tag {
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.organ-tag.marrow { background: rgba(196,30,58,0.1); color: var(--blood-red); }
+.organ-tag.lung { background: rgba(45,95,138,0.1); color: var(--lung-blue); }
+.organ-tag.spleen { background: rgba(107,63,160,0.1); color: var(--spleen-purple); }
+.organ-tag.cardiac { background: rgba(232,131,138,0.15); color: #c0404a; }
+.organ-tag.fetal { background: rgba(212,165,116,0.15); color: #a07040; }
+.organ-tag.future { background: rgba(0,180,216,0.1); color: var(--accent-cyan); }
+.organ-tag.paradigm { background: rgba(26,26,46,0.08); color: var(--text-primary); }
+
+.insight-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.insight-card p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.key-finding {
+  background: linear-gradient(135deg, #fef9f0, #fff5eb);
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  margin: 1.5rem 0;
+  border-left: 3px solid var(--plasma-gold);
+}
+
+.key-finding strong {
+  color: var(--blood-dark);
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.clinical-box {
+  background: linear-gradient(135deg, #f0f7ff, #e8f4fd);
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  margin: 1.5rem 0;
+  border-left: 3px solid var(--lung-blue);
+}
+
+.clinical-box strong {
+  color: var(--lung-blue);
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mind-blow {
+  background: linear-gradient(135deg, #1a0a2e, #2d1b4e);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  color: white;
+}
+
+.mind-blow strong {
+  color: var(--plasma-gold);
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mind-blow p { color: rgba(255,255,255,0.85); }
+
+.ref {
+  font-size: 0.78rem;
+  color: #999;
+  font-style: italic;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid #eee;
+}
+
+/* ====== DATA VISUALIZATIONS ====== */
+.data-viz {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+
+.data-viz h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bar-label {
+  width: 120px;
+  text-align: right;
+  font-size: 0.82rem;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.bar-track {
+  flex: 1;
+  height: 28px;
+  background: #f0ebe5;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 14px;
+  transition: width 1.5s ease;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.bar-fill.marrow { background: linear-gradient(90deg, var(--blood-red), #e04060); }
+.bar-fill.lung { background: linear-gradient(90deg, var(--lung-blue), #4080b0); }
+.bar-fill.spleen { background: linear-gradient(90deg, var(--spleen-purple), #8060c0); }
+.bar-fill.fetal { background: linear-gradient(90deg, var(--plasma-gold), #e0c090); }
+.bar-fill.heart { background: linear-gradient(90deg, var(--cardiac-pink), #f0a0a8); }
+
+/* ====== ORGAN MAP ====== */
+.organ-map {
+  background: linear-gradient(180deg, #0d0521, var(--marrow-deep));
+  padding: 4rem 2rem;
+  margin: 3rem 0;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+}
+
+.organ-map h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.organ-map .subtitle {
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.organ-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.organ-cell {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.organ-cell:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-4px);
+}
+
+.organ-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.organ-cell h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.organ-cell .role {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.organ-cell .stat {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--plasma-gold);
+  margin: 0.5rem 0;
+}
+
+.organ-cell .detail {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ====== BIG IDEA SECTIONS ====== */
+.big-idea {
+  background: linear-gradient(135deg, var(--blood-dark), var(--marrow-deep));
+  padding: 4rem 2.5rem;
+  border-radius: 20px;
+  color: white;
+  margin: 3rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.big-idea::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,165,116,0.15), transparent);
+}
+
+.big-idea h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.big-idea p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.big-idea .number {
+  font-size: 4rem;
+  font-weight: 900;
+  color: rgba(212,165,116,0.2);
+  position: absolute;
+  top: -1rem;
+  right: 2rem;
+  font-family: 'Playfair Display', serif;
+}
+
+/* ====== APPLICATION CARDS ====== */
+.application-section {
+  padding: 4rem 0;
+}
+
+.application-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.application-section .subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+}
+
+.app-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  transition: transform 0.3s ease;
+}
+
+.app-card:hover { transform: translateY(-3px); }
+
+.app-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.app-icon.red { background: linear-gradient(135deg, rgba(196,30,58,0.1), rgba(196,30,58,0.05)); }
+.app-icon.blue { background: linear-gradient(135deg, rgba(45,95,138,0.1), rgba(45,95,138,0.05)); }
+.app-icon.purple { background: linear-gradient(135deg, rgba(107,63,160,0.1), rgba(107,63,160,0.05)); }
+.app-icon.gold { background: linear-gradient(135deg, rgba(212,165,116,0.15), rgba(212,165,116,0.05)); }
+.app-icon.cyan { background: linear-gradient(135deg, rgba(0,180,216,0.1), rgba(0,180,216,0.05)); }
+
+.app-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.app-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.feasibility {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.feasibility.near { background: #e6f9e8; color: #1a7a2a; }
+.feasibility.mid { background: #fff3e0; color: #b06000; }
+.feasibility.far { background: #fce4ec; color: #c62828; }
+
+/* ====== FOOTER ====== */
+.blog-footer {
+  background: var(--marrow-deep);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+.blog-footer .brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-footer .brand span { color: var(--blood-red); }
+
+.blog-footer .tagline {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+.blog-footer .hashtag {
+  display: inline-block;
+  background: rgba(196,30,58,0.2);
+  color: var(--blood-red);
+  padding: 0.3rem 1rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-footer .disclaimer {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+  line-height: 1.5;
+}
+
+/* ====== TABLE ====== */
+.evidence-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.85rem;
+}
+
+.evidence-table th {
+  background: var(--marrow-deep);
+  color: white;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.evidence-table td {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.evidence-table tr:nth-child(even) { background: #faf8f5; }
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .insight-card { padding: 1.5rem; }
+  .app-card { grid-template-columns: 1fr; }
+  .app-icon { width: 60px; height: 60px; font-size: 1.5rem; }
+  .organ-grid { grid-template-columns: 1fr 1fr; }
+  .big-idea { padding: 2rem 1.5rem; }
+  .big-idea .number { display: none; }
+  .bar-label { width: 80px; font-size: 0.75rem; }
+  .timeline-bar { display: none; }
+}
+
+/* ====== ANIMATIONS ====== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="floating-cells" id="cells"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Evidence Review &bull; 20 Papers &bull; 130 Years</div>
+    <h1>The <span>Platelet Odyssey</span></h1>
+    <h1 style="font-size: clamp(1.5rem, 3.5vw, 2.5rem); margin-top: -0.5rem;">Where Are Platelets Really Born?</h1>
+    <p class="hero-subtitle">From Aschoff's 1893 hand-drawn capillary emboli to 2024 single-cell RNA atlases, a 130-year scientific journey reveals that platelets are manufactured in a distributed organ system spanning bone marrow, lung, spleen, heart, and beyond. What we thought we knew was only half the story.</p>
+    <p class="hero-meta">By <strong>Dr Abdul Mannan</strong> &bull; Consultant Haematologist &bull; #BloodDoctor</p>
+  </div>
+  <div class="scroll-indicator">Scroll to explore</div>
+</section>
+
+<!-- ====== TIMELINE ====== -->
+<section class="timeline-intro">
+  <h2>A 130-Year Timeline of Discovery</h2>
+  <p style="color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto 2rem; font-size: 0.9rem;">Each milestone challenged the dogma of its era</p>
+  <div class="timeline-bar">
+    <div class="timeline-dot"><span class="year">1893</span><span class="label">Aschoff</span></div>
+    <div class="timeline-dot"><span class="year">1948</span><span class="label">Brill</span></div>
+    <div class="timeline-dot"><span class="year">2010</span><span class="label">Fuentes</span></div>
+    <div class="timeline-dot"><span class="year">2018</span><span class="label">Brown</span></div>
+    <div class="timeline-dot"><span class="year">2020</span><span class="label">Eckly</span></div>
+    <div class="timeline-dot"><span class="year">2021</span><span class="label">Wang</span></div>
+    <div class="timeline-dot"><span class="year">2022</span><span class="label">Gelon</span></div>
+    <div class="timeline-dot"><span class="year">2024</span><span class="label">Asquith</span></div>
+  </div>
+</section>
+
+<!-- ====== DISTRIBUTED ORGAN MAP ====== -->
+<div class="content-wrap">
+  <div class="organ-map fade-in">
+    <h2>The Distributed Platelet Factory</h2>
+    <p class="subtitle">Megakaryocytes and platelet production occur across multiple organs &mdash; not just bone marrow</p>
+    <div class="organ-grid">
+      <div class="organ-cell">
+        <div class="organ-icon">🦴</div>
+        <h4>Bone Marrow</h4>
+        <div class="role">The Manufacturing Plant</div>
+        <div class="stat">79%</div>
+        <div class="detail">of all MKs reside here; primary site of megakaryopoiesis</div>
+      </div>
+      <div class="organ-cell">
+        <div class="organ-icon">🫁</div>
+        <h4>Lung</h4>
+        <div class="role">The Finishing Line</div>
+        <div class="stat">50-98%</div>
+        <div class="detail">of final platelet release may occur here via MK fragmentation</div>
+      </div>
+      <div class="organ-cell">
+        <div class="organ-icon">🟤</div>
+        <h4>Spleen</h4>
+        <div class="role">The Reserve Battalion</div>
+        <div class="stat">13%</div>
+        <div class="detail">of MKs; activates emergency thrombopoiesis in sepsis</div>
+      </div>
+      <div class="organ-cell">
+        <div class="organ-icon">❤️</div>
+        <h4>Heart</h4>
+        <div class="role">The Inflammatory Sentinel</div>
+        <div class="stat">64%</div>
+        <div class="detail">of COVID-19 autopsies had cardiac MKs (also 40% pre-pandemic)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== INSIGHT 1 ====== -->
+<div class="content-wrap">
+<section class="insight-section">
+  <div class="section-number fade-in">01</div>
+  <div class="insight-card fade-in">
+    <span class="organ-tag paradigm">Paradigm Shift</span>
+    <h3>The Bone Marrow vs Lung Debate Is a False Dichotomy</h3>
+    <p>For over a century, haematologists have argued about where platelets are born: bone marrow or lung? The 2024 landmark study by Asquith et al. in <em>Blood</em> used flow cytometry, light-sheet fluorescence microscopy (LSFM), two-photon intravital imaging, AND single-cell RNA sequencing to conclusively demonstrate that the bone marrow harbours 11-fold more MK progenitors and 75-fold more LT-HSCs than the lung.</p>
+    <p>Yet Lefrancais & Looney's 2019 review in <em>Physiology</em> compiled evidence that the lung contributes 50-98% of <strong>final platelet release</strong>, with direct intravital visualization showing platelet shedding in pulmonary capillaries.</p>
+    <div class="mind-blow">
+      <strong>The synthesis no single paper states:</strong>
+      <p>These findings aren't contradictory &mdash; they describe two phases of a single pipeline. The bone marrow is the <strong>manufacturing site</strong> (megakaryopoiesis), while the lung is the <strong>finishing line</strong> (terminal platelet shedding from circulating MK fragments). Neither organ alone completes thrombopoiesis. The platelet is born in the marrow but <em>delivered</em> in the lung.</p>
+    </div>
+    <p class="ref">Asquith et al. (2024) Blood 143(3):272-278 &bull; Lefrancais & Looney (2019) Physiology 34:392-401</p>
+  </div>
+
+  <!-- ====== DATA VIZ ====== -->
+  <div class="data-viz fade-in">
+    <h4>Where Do Megakaryocytes Actually Live? (Flow Cytometry Data)</h4>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Bone Marrow</div>
+        <div class="bar-track"><div class="bar-fill marrow" style="width: 79%;">79% of MKs</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Spleen</div>
+        <div class="bar-track"><div class="bar-fill spleen" style="width: 13%;">13%</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Lung</div>
+        <div class="bar-track"><div class="bar-fill lung" style="width: 8%;">8%</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Fetal Liver</div>
+        <div class="bar-track"><div class="bar-fill fetal" style="width: 45%;">Major site prenatally</div></div>
+      </div>
+    </div>
+    <p style="font-size: 0.75rem; color: #999; margin-top: 1rem; text-align: center;">Source: Asquith et al. 2024, Gelon et al. 2022. Adult murine data by flow cytometry.</p>
+  </div>
+</section>
+
+<!-- ====== INSIGHT 2 ====== -->
+<section class="insight-section">
+  <div class="section-number fade-in">02</div>
+  <div class="insight-card fade-in">
+    <span class="organ-tag marrow">Bone Marrow</span>
+    <h3>Textbook Proplatelets Are an In Vitro Artefact &mdash; In Vivo, Megakaryocytes Use "Mass Membrane Fusion"</h3>
+    <p>Every haematology textbook shows elegant thin proplatelet extensions budding off megakaryocytes. Brown et al. (2018) in <em>Life Science Alliance</em> used intravital correlative light-electron microscopy (CLEM) of living mouse bone marrow and discovered that <strong>&gt;90% of MK projections entering sinusoids are large protrusions (&gt;3 &mu;m)</strong>, not the fine proplatelet extensions (2-3 &mu;m) seen in culture.</p>
+    <div class="key-finding">
+      <strong>The mechanism is completely different:</strong>
+      <p>Large protrusions use <strong>mass membrane fusion</strong> between the internal membrane system (IMS) and plasma membrane, not dynein-dependent microtubule sliding. Microtubule content at the leading edge is only 14% (vs 42% in proplatelets). The scission point is in the marrow parenchyma, not at the vessel wall &mdash; meaning shear forces alone do not explain platelet release.</p>
+    </div>
+    <p>Once detached from the MK body, 72% of these free large protrusions convert to proplatelet morphology, suggesting a two-step process: first extrusion as large protrusions, then remodeling into proplatelets in the circulation.</p>
+    <p class="ref">Brown et al. (2018) Life Sci Alliance 1(2):e201800061</p>
+  </div>
+</section>
+
+<!-- ====== INSIGHT 3 ====== -->
+<section class="insight-section">
+  <div class="section-number fade-in">03</div>
+  <div class="insight-card fade-in">
+    <span class="organ-tag marrow">Bone Marrow</span>
+    <h3>Megakaryocytes Drill Through Endothelium Using "Podosome Collectives" &mdash; Borrowed From Osteoclasts</h3>
+    <p>How does a 50-100 &mu;m megakaryocyte squeeze its cytoplasmic processes through a continuous endothelial barrier without tearing it? Eckly et al. (2020) in <em>JTH</em> discovered the answer: MKs form <strong>in vivo podosome-like structures</strong> &mdash; F-actin pillars oriented perpendicular to the endothelium, interconnected by a contractile actomyosin network.</p>
+    <p>These podosomes work <em>collectively</em>: groups of closely positioned structures cooperate to create transcellular pores through endothelial cells. Loss of Arp2/3 complex profoundly impairs pore initiation; loss of myosin IIA scatters pore distribution.</p>
+    <div class="clinical-box">
+      <strong>Clinical connection &mdash; Wiskott-Aldrich Syndrome:</strong>
+      <p>In WAS, mutations in the WAS protein lead to defective actin polymerization &rarr; impaired podosome formation &rarr; defective MK intravasation &rarr; ectopic platelet release within the marrow &rarr; microthrombocytopenia. This study provides the mechanistic explanation for the small, dysfunctional platelets in WAS.</p>
+    </div>
+    <p class="ref">Eckly et al. (2020) J Thromb Haemost 18:2987-3001</p>
+  </div>
+</section>
+
+<!-- ====== INSIGHT 4 ====== -->
+<section class="insight-section">
+  <div class="section-number fade-in">04</div>
+  <div class="insight-card lung fade-in">
+    <span class="organ-tag lung">Lung</span>
+    <h3>The Lung Contains TWO Completely Different MK Populations With Opposite Functions</h3>
+    <p>Gelon, Fromont & Lefrancais (2022) in <em>Frontiers in Immunology</em> crystallized a distinction that redefines what a megakaryocyte IS:</p>
+
+    <table class="evidence-table">
+      <thead>
+        <tr><th>Feature</th><th>MK<sub>circ</sub> (Circulating)</th><th>MK<sub>L</sub> (Lung-Resident)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Location</td><td>Intravascular, at bifurcations</td><td>Pulmonary interstitium</td></tr>
+        <tr><td>Origin</td><td>Bone marrow / spleen</td><td>Unknown (possibly local progenitors)</td></tr>
+        <tr><td>Ploidy</td><td>High (polyploid)</td><td>Low (mainly diploid)</td></tr>
+        <tr><td>Size</td><td>Large (50-100 &mu;m)</td><td>Small (&lt;20 &mu;m)</td></tr>
+        <tr><td>Function</td><td>Platelet shedding</td><td>Innate immunity, pathogen recognition</td></tr>
+        <tr><td>Gene signature</td><td>Thrombopoiesis genes</td><td>Immune genes (inflammation, phagocytosis)</td></tr>
+        <tr><td>Proportion in mice</td><td>40% of lung MKs</td><td>60-80% of lung MKs</td></tr>
+        <tr><td>Found in healthy lungs</td><td>67% of autopsies (4 MK/cm&sup2;)</td><td>Yes, sessile, no platelet release seen</td></tr>
+      </tbody>
+    </table>
+
+    <div class="mind-blow">
+      <strong>Out-of-the-box implication:</strong>
+      <p>The megakaryocyte is not a single cell type with one function. It's a <strong>bifunctional cell class</strong> &mdash; haemostatic in the marrow and vasculature, immunological in the lung interstitium. This is analogous to how macrophages have tissue-specific identities (Kupffer cells, microglia, alveolar macrophages). Are lung-resident MKs the "megakaryocyte equivalent" of tissue-resident macrophages?</p>
+    </div>
+    <p class="ref">Gelon et al. (2022) Front Immunol 13:1029223</p>
+  </div>
+</section>
+
+<!-- ====== INSIGHT 5 ====== -->
+<section class="insight-section">
+  <div class="section-number fade-in">05</div>
+  <div class="insight-card fetal fade-in">
+    <span class="organ-tag fetal">Developmental Biology</span>
+    <h3>Six Transcriptionally Distinct MK Subpopulations Exist &mdash; Including a CD14+ "Immune MK"</h3>
+    <p>Wang et al. (2021) in <em>Cell Stem Cell</em> performed scRNA-seq on MKs from human yolk sac (4 WPC) and fetal liver (8 WPC) and identified <strong>six MK subpopulations</strong> with distinct transcriptional programs:</p>
+    <p><strong>MK1</strong> (glycolysis), <strong>MK2</strong> (cell cycle), <strong>MK3</strong> (thrombopoiesis/coagulation), <strong>MK4</strong> (niche support &mdash; secretes IGFBP3 and PTN to maintain HSCs), <strong>MK5</strong> (translational initiation), and <strong>MK6</strong> (immune functions &mdash; expresses C1QC, CTSS, CYBB, MAFB, SAMHD1).</p>
+    <div class="key-finding">
+      <strong>The CD14+ immune megakaryocyte:</strong>
+      <p>MK6 cells co-express CD42b+ and CD14+ and show enrichment of innate immune response and macrophage activation pathways. They can be generated from hESCs in vitro. Morphologically, CD41a+CD42b+CD14+ cells resemble monocyte-macrophages more than classical MKs &mdash; raising the question: is this a megakaryocyte behaving like a macrophage, or a macrophage wearing megakaryocyte markers?</p>
+    </div>
+    <p>Crucially, MK subpopulations followed <strong>two distinct developmental trajectories</strong>: Direction 1 (thrombopoiesis-biased, expressing PF4, GATA1, NFE2) and Direction 2 (immune-biased, expressing IGFBP3, COL1A1, CTSS, CYBB). This bifurcation appears to be an ancient evolutionary feature, present from the earliest stages of human embryonic development.</p>
+    <p class="ref">Wang et al. (2021) Cell Stem Cell 28:535-549</p>
+  </div>
+</section>
+
+<!-- ====== INSIGHT 6 ====== -->
+<section class="insight-section">
+  <div class="section-number fade-in">06</div>
+  <div class="insight-card fetal fade-in">
+    <span class="organ-tag fetal">Neonatal</span>
+    <h3>Fetal Megakaryocytes Are Not "Immature" &mdash; They're a Parallel Operating System</h3>
+    <p>Davenport, Liu & Sola-Visner (2022) in <em>Blood</em> overturned the assumption that fetal/neonatal MKs are simply immature adult cells. Despite being small and low-ploidy (78% are &le;8N vs 33% in adults), cord blood MKs have <strong>all ultrastructural features of maturity</strong>: abundant &alpha;-granules, von Willebrand factor, P-selectin, and a well-developed demarcation membrane system.</p>
+    <p>The molecular master switch is <strong>IGF2BP3</strong>, a fetal-specific RNA-binding protein that stabilizes the 7SK snRNA complex, keeping P-TEFb (the transcriptional elongation kinase) inactive. This dampens megakaryocyte morphogenesis genes while allowing proliferation &mdash; a developmental strategy that favours <em>many small platelet-producing cells</em> over <em>fewer large ones</em> to rapidly populate expanding fetal blood volume.</p>
+    <div class="clinical-box">
+      <strong>Why this matters at the bedside:</strong>
+      <p>Neonatal platelets have low P-selectin &rarr; reduced neutrophil binding &rarr; different inflammatory responses. TPO/c-MPL axis functions differently at different developmental stages. Platelet transfusion thresholds derived from adult studies may not be physiologically appropriate for neonates.</p>
+    </div>
+    <p class="ref">Davenport et al. (2022) Blood 139(22):3233-3244</p>
+  </div>
+</section>
+
+<!-- ====== BIG IDEA: LUNG AS BIOREACTOR ====== -->
+<div class="big-idea fade-in">
+  <div class="number">07</div>
+  <h2>The Lung Is the World's Most Efficient Platelet Bioreactor &mdash; And We Can Exploit It</h2>
+  <p>Fuentes et al. (2010, <em>J Clin Invest</em>) showed that infusing ex vivo-generated mature MKs into mice produced a <strong>~100-fold increase</strong> in recipient platelet count vs prior in vitro methods. Wang et al. (2015, <em>Blood</em>) confirmed that human MKs infused into NSG mice release platelets intrapulmonarily that are <strong>indistinguishable from donor platelets</strong> in size, surface markers, and ability to incorporate into thrombi.</p>
+  <p>The "cautionary tale" from Wang et al. is critical: ex vivo-produced platelet-like particles (EV-PLPs) are 85% CD41-negative, mostly preactivated, and rapidly cleared by macrophages. But IV-platelets released from intrapulmonary-entrapped MKs are nearly identical to donor platelets. The lung's unique combination of shear stress, turbulence, oxygen tension, and vWF-rich endothelium cannot be replicated in any bioreactor.</p>
+  <p style="color: var(--plasma-gold); font-weight: 600;">The implication: megakaryocyte transfusion, not platelet transfusion, may be the future.</p>
+</div>
+
+<!-- ====== INSIGHT 8 ====== -->
+<section class="insight-section">
+  <div class="section-number fade-in">08</div>
+  <div class="insight-card cardiac fade-in">
+    <span class="organ-tag cardiac">COVID-19 / Cardiac</span>
+    <h3>Cardiac Megakaryocytes in COVID-19 Were a Non-Specific Inflammatory Marker &mdash; Not a Disease Signature</h3>
+    <p>The early COVID literature sensationalized cardiac megakaryocytes as a disease-specific "immunothrombotic" signature. Gawelek et al. (2022, <em>Histopathology</em>) examined cardiac tissue from 36 COVID-19 and 12 pre-pandemic autopsies. Cardiac MKs were found in <strong>64% of COVID-19 cases but also 40% of pre-pandemic controls</strong> with overlapping pathologies (thromboembolic disease, DAD, heart failure).</p>
+    <div class="key-finding">
+      <strong>What the data actually show:</strong>
+      <p>The density was higher in COVID-19 (1.77 vs 0.84 MK/cm&sup2;), but this reflects the intensity of inflammation and thromboembolic burden, not a COVID-specific mechanism. Combined with Brill & Halpern's 1948 autopsy data (MKs found in 100% of lungs, 62% of spleens, 36% of kidneys, 13% of hearts), cardiac MKs are a <strong>general marker of systemic inflammation</strong> that has existed for at least 75 years before COVID-19.</p>
+    </div>
+    <p class="ref">Gawelek et al. (2022) Histopathology 81:600-624 &bull; Brill & Halpern (1948) Blood 3(3):286-291</p>
+  </div>
+</section>
+
+<!-- ====== INSIGHT 9 ====== -->
+<section class="insight-section">
+  <div class="section-number fade-in">09</div>
+  <div class="insight-card fade-in">
+    <span class="organ-tag paradigm">Classification Crisis</span>
+    <h3>CD41 Alone Cannot Define a Megakaryocyte &mdash; The Field Has an Identity Problem</h3>
+    <p>Asquith et al. (2024) showed that in murine scRNA-seq data, only <strong>~2% of CD41+ lung cells</strong> expressed canonical MK genes (Itga2b, Gp1ba, Gata1, Pf4). The remaining CD41+ cells expressed progenitor and immune-cell markers. In human lung single-cell atlases, only 11 of 60,993 cells (~0.02%) were identified as MKs, and <strong>none</strong> expressed canonical MK markers.</p>
+    <p>Combined with Wang et al.'s (2021) discovery of CD14+ immune MKs and Gelon et al.'s (2022) MK<sub>L</sub> population with immune transcriptional signatures, the field faces a fundamental question: <strong>what defines a megakaryocyte?</strong></p>
+    <div class="mind-blow">
+      <strong>The identity crisis:</strong>
+      <p>Using CD41 alone massively overestimates lung MK numbers. Using canonical MK genes alone misses the immune subpopulation. The estimates of lung platelet production (7% to 98%) are wildly variable partly because different studies are counting different cell populations. Until the field agrees on a consensus surface marker panel that distinguishes platelet-producing MKs from immune-function MKs from CD41+ non-MKs, the "where do platelets come from" debate cannot be resolved.</p>
+    </div>
+    <p class="ref">Asquith et al. (2024) Blood 143(3):272-278 &bull; Wang et al. (2021) Cell Stem Cell 28:535-549</p>
+  </div>
+</section>
+
+<!-- ====== INSIGHT 10 ====== -->
+<section class="insight-section">
+  <div class="section-number fade-in">10</div>
+  <div class="insight-card lung fade-in">
+    <span class="organ-tag lung">Cardiothoracic Surgery</span>
+    <h3>Post-CPB Thrombocytopenia Is Not Just Consumption &mdash; It's Loss of the Lung Production Line</h3>
+    <p>Griffin et al. (2020, <em>Ann Thorac Surg</em>) showed that post-CPB thrombocytopenia (occurring in 26% of 1,364 patients) is independently associated with mortality (OR 6.19), infection (OR 2.08), stroke (OR 3.18), and AKI (OR 1.64). The classical explanation is consumption on the extracorporeal circuit.</p>
+    <div class="mind-blow">
+      <strong>The hidden mechanism:</strong>
+      <p>If the lung contributes 50-98% of terminal platelet release (Lefrancais & Looney 2019), and MK<sub>circ</sub> increase 3-fold in patients whose lungs are bypassed (Gelon et al. 2022), then CPB thrombocytopenia has a <strong>dual mechanism</strong>: consumption of platelets on the circuit AND loss of the lung finishing line for new platelet production. The MK fragments that would normally be processed into platelets in the pulmonary vasculature are being shunted past the lung, emerging as unprocessed fragments that are cleared by the reticuloendothelial system. This explains why the thrombocytopenia can be disproportionate to circuit-induced consumption.</p>
+    </div>
+    <p class="ref">Griffin et al. (2020) Ann Thorac Surg 110:50-57 &bull; Lefrancais & Looney (2019) Physiology 34:392-401 &bull; Gelon et al. (2022) Front Immunol 13:1029223</p>
+  </div>
+</section>
+
+<!-- ====== OUT-OF-THE-BOX APPLICATIONS ====== -->
+<section class="application-section">
+  <h2>Out-of-the-Box Applications</h2>
+  <p class="subtitle">Where these insights could take us &mdash; from bedside to biotech</p>
+
+  <div class="app-card fade-in">
+    <div class="app-icon red">🩸</div>
+    <div>
+      <h3>Megakaryocyte Transfusion Instead of Platelet Transfusion</h3>
+      <p>Infuse ex vivo-generated MKs and let the patient's own lungs do the platelet production. Each MK generates 100-200 platelets in vivo vs 1-2% yield in vitro. Could solve the 5-day shelf-life problem, cold chain logistics, and bacterial contamination risk of stored platelets.</p>
+      <span class="feasibility near">Near-term feasibility</span>
+    </div>
+  </div>
+
+  <div class="app-card fade-in">
+    <div class="app-icon blue">🫁</div>
+    <div>
+      <h3>Lung-Protective Strategies to Preserve Platelet Production in ARDS</h3>
+      <p>If the lung produces most platelets, then lung-protective ventilation strategies aren't just about gas exchange &mdash; they're about preserving the platelet production line. Thrombocytopenia in ARDS may be partly a production deficit, not just consumption. Could reframe the platelet transfusion trigger in critical care.</p>
+      <span class="feasibility near">Near-term feasibility</span>
+    </div>
+  </div>
+
+  <div class="app-card fade-in">
+    <div class="app-icon purple">💊</div>
+    <div>
+      <h3>S1PR Modulators (Fingolimod) as Accidental Thrombopoiesis Disruptors</h3>
+      <p>The S1P/S1PR axis guides proplatelet elongation into the bloodstream (Gelon et al. 2022). Patients on fingolimod (S1PR modulator for MS) develop lymphopenia &mdash; but its effects on thrombopoiesis via disrupted S1P-guided MK egress have never been systematically studied. A low-hanging pharmacovigilance fruit.</p>
+      <span class="feasibility near">Near-term feasibility</span>
+    </div>
+  </div>
+
+  <div class="app-card fade-in">
+    <div class="app-icon gold">🧬</div>
+    <div>
+      <h3>IGF2BP3 as a Therapeutic Target for Neonatal Thrombocytopenia</h3>
+      <p>If IGF2BP3 is the molecular switch that keeps fetal MKs in "high-proliferation, low-ploidy" mode (Davenport et al. 2022), then modulating it could shift the balance. Knockdown of IGF2BP3 in neonatal MKs enhances P-TEFb activation, producing adult-like MK features &mdash; potentially a precision therapy for severe neonatal thrombocytopenia.</p>
+      <span class="feasibility mid">Medium-term</span>
+    </div>
+  </div>
+
+  <div class="app-card fade-in">
+    <div class="app-icon cyan">🏭</div>
+    <div>
+      <h3>Biomimetic Lung-on-Chip Platelet Bioreactors</h3>
+      <p>Current bioreactors fail because they lack the lung's unique combination: shear stress (0.4-3.0 Pa), turbulence at bifurcations, high O<sub>2</sub> tension driving ROS-dependent cytoskeleton remodeling, and vWF-rich endothelial surfaces enabling GPIb-mediated mechanotransduction. A bioreactor that replicates ALL four features could achieve physiological platelet yields for the first time.</p>
+      <span class="feasibility mid">Medium-term</span>
+    </div>
+  </div>
+
+  <div class="app-card fade-in">
+    <div class="app-icon red">🎯</div>
+    <div>
+      <h3>Platelet "Postcode" Hypothesis: Site of Production Determines Function</h3>
+      <p>Megakaryocytes sort mRNAs non-randomly into platelets. If the lung environment (pathogens, O<sub>2</sub>, inflammatory signals) imprints different mRNA/miRNA profiles into lung-produced vs marrow-produced platelets, then platelets from different sites might have different functional specializations. Could explain altered platelet reactivity in lung diseases (COPD, asthma, CF).</p>
+      <span class="feasibility far">Long-term / Speculative</span>
+    </div>
+  </div>
+
+  <div class="app-card fade-in">
+    <div class="app-icon purple">🔬</div>
+    <div>
+      <h3>Lung-Resident MKs as Immune Sentinels &mdash; A New Drug Target</h3>
+      <p>MK<sub>L</sub> cells express innate immunity genes (pathogen recognition, inflammation) and sit in the interstitium where they are among the first cells to encounter inhaled pathogens. If they function as immune sentinels, modulating their activity could be a novel approach to pulmonary infections &mdash; or conversely, their inappropriate activation could contribute to inflammatory lung disease.</p>
+      <span class="feasibility far">Long-term / Speculative</span>
+    </div>
+  </div>
+
+  <div class="app-card fade-in">
+    <div class="app-icon cyan">🫀</div>
+    <div>
+      <h3>Reimagining Cardiopulmonary Bypass: Lung-Inclusive Perfusion</h3>
+      <p>If bypassing the lung causes platelet production deficits beyond simple consumption, then perfusion strategies that maintain at least partial lung flow during CPB could preserve in vivo platelet production. This could be studied as a modifiable factor in the 26% of post-CPB patients who develop thrombocytopenia &mdash; a population with 4.6x higher mortality.</p>
+      <span class="feasibility near">Near-term feasibility</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FROM ASCHOFF TO TODAY ====== -->
+<div class="big-idea fade-in">
+  <h2>From Aschoff's Drawings to Single-Cell Atlases</h2>
+  <p>In 1893, Ludwig Aschoff at Strasbourg observed "giant-nucleated cells" plugging pulmonary capillaries during infections and hand-drew their forms in <em>Virchow's Archiv</em>. He saw their irregular shapes &mdash; 14 to 92 &mu;m long, wedged into 5 &mu;m capillaries &mdash; and wondered if they were pathological emboli. 130 years later, we know those cells were megakaryocytes caught in the act of doing exactly what they were designed to do: releasing platelets in the lung.</p>
+  <p>What Aschoff saw with his microscope and carmine stain, we now quantify with 10X Genomics, CITE-seq, and intravital two-photon microscopy. The cells haven't changed. Only our ability to understand them has.</p>
+  <p>The platelet is not born in one place. It is <strong>conceived</strong> in the bone marrow, <strong>shaped</strong> by its transit through the vasculature, and <strong>delivered</strong> in the lung. Its siblings may carry different functional "postcodes" depending on where in this journey they are released. And a subset of their parent cells has abandoned platelet production entirely to become immune sentinels in the lung interstitium.</p>
+  <p style="color: var(--plasma-gold); font-weight: 600; font-size: 1.1rem;">The platelet odyssey continues. The next chapter will be written by those who see the whole distributed system, not just the bone marrow.</p>
+</div>
+
+</div> <!-- end content-wrap -->
+
+<!-- ====== REFERENCES ====== -->
+<div class="content-wrap" style="padding-bottom: 3rem;">
+  <details style="margin-top: 2rem;">
+    <summary style="cursor: pointer; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">References (Click to Expand)</summary>
+    <ol style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.8; padding-left: 1.5rem;">
+      <li>Aschoff, L. (1893). Ueber capillare Embolie von riesenkernhaltigen Zellen. <em>Archiv fur pathologische Anatomie</em>, 134, 11-14.</li>
+      <li>Asquith, N.L. et al. (2024). The bone marrow is the primary site of thrombopoiesis. <em>Blood</em>, 143(3), 272-278.</li>
+      <li>Brill, R. & Halpern, M.M. (1948). The frequency of megakaryocytes in autopsy sections. <em>Blood</em>, 3(3), 286-291.</li>
+      <li>Bronte, V. & Pittet, M.J. (2013). The spleen in local and systemic regulation of immunity. <em>Immunity</em>, 39(5), 806-818.</li>
+      <li>Brown, E. et al. (2018). Multiple membrane extrusion sites drive megakaryocyte migration into bone marrow blood vessels. <em>Life Sci Alliance</em>, 1(2), e201800061.</li>
+      <li>Davenport, P., Liu, Z.J. & Sola-Visner, M. (2022). Fetal vs adult megakaryopoiesis. <em>Blood</em>, 139(22), 3233-3244.</li>
+      <li>Eckly, A. et al. (2020). Megakaryocytes use in vivo podosome-like structures working collectively to penetrate the endothelial barrier of bone marrow sinusoids. <em>J Thromb Haemost</em>, 18, 2987-3001.</li>
+      <li>Fuentes, R. et al. (2010). Infusion of mature megakaryocytes into mice yields functional platelets. <em>J Clin Invest</em>, 120(11), 3917-3922.</li>
+      <li>Gawelek, K.L. et al. (2022). Cardiac megakaryocytes in SARS-CoV-2-positive autopsies. <em>Histopathology</em>, 81, 600-624.</li>
+      <li>Gelon, L., Fromont, L. & Lefrancais, E. (2022). Occurrence and role of lung megakaryocytes in infection and inflammation. <em>Front Immunol</em>, 13, 1029223.</li>
+      <li>Griffin, B.R. et al. (2020). Thrombocytopenia after cardiopulmonary bypass is associated with increased morbidity and mortality. <em>Ann Thorac Surg</em>, 110, 50-57.</li>
+      <li>Lefrancais, E. & Looney, M.R. (2019). Platelet biogenesis in the lung circulation. <em>Physiology</em>, 34, 392-401.</li>
+      <li>Wang, H. et al. (2021). Decoding human megakaryocyte development. <em>Cell Stem Cell</em>, 28, 535-549.</li>
+      <li>Wang, Y. et al. (2015). Comparative analysis of human ex vivo-generated platelets vs megakaryocyte-generated platelets in mice: a cautionary tale. <em>Blood</em>, 125(23), 3627-3636.</li>
+    </ol>
+  </details>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer class="blog-footer">
+  <div class="brand">Blood<span>🩸</span>Doctor</div>
+  <p class="tagline">Evidence-based haematology education</p>
+  <div class="hashtag">#BloodDoctor</div>
+  <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">Dr Abdul Mannan &bull; Consultant Haematologist</p>
+  <p class="disclaimer">This article is for educational purposes only and does not constitute medical advice. Clinical decisions should be based on individual patient assessment and current guidelines. All claims are referenced to peer-reviewed literature from the author's Zotero library.</p>
+  <p style="color: rgba(255,255,255,0.2); font-size: 0.7rem; margin-top: 1.5rem;">&copy; 2026 Blood Doctor. Built with evidence.</p>
+</footer>
+
+<script>
+// ====== Floating cells animation ======
+const cellContainer = document.getElementById('cells');
+const colors = ['#c41e3a', '#e04060', '#d4a574', '#6b3fa0', '#2d5f8a'];
+for (let i = 0; i < 25; i++) {
+  const cell = document.createElement('div');
+  cell.className = 'cell';
+  const size = Math.random() * 20 + 5;
+  cell.style.width = size + 'px';
+  cell.style.height = size + 'px';
+  cell.style.left = Math.random() * 100 + '%';
+  cell.style.background = colors[Math.floor(Math.random() * colors.length)];
+  cell.style.animationDuration = (Math.random() * 15 + 10) + 's';
+  cell.style.animationDelay = (Math.random() * 10) + 's';
+  cellContainer.appendChild(cell);
+}
+
+// ====== Intersection Observer for fade-in ======
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
